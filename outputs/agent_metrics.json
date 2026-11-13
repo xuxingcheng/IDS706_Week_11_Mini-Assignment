@@ -1,0 +1,123 @@
+{
+  "model": "logistic_regression",
+  "seed": 42,
+  "features": [
+    "math_g1",
+    "math_g2",
+    "portuguese_g1",
+    "portuguese_g2"
+  ],
+  "target": "passed_math",
+  "positive_class": 1,
+  "confusion_matrix_labels": [
+    0,
+    1
+  ],
+  "split_sizes": {
+    "train": 214,
+    "validation": 72,
+    "test": 72
+  },
+  "threshold": 0.97,
+  "stop_reason": "Both candidates ran and validation F1 stayed below the target.",
+  "validation": {
+    "accuracy": 0.9444444444444444,
+    "f1": 0.9591836734693877,
+    "confusion_matrix": [
+      [
+        21,
+        2
+      ],
+      [
+        2,
+        47
+      ]
+    ]
+  },
+  "test": {
+    "accuracy": 0.8472222222222222,
+    "f1": 0.8910891089108911,
+    "confusion_matrix": [
+      [
+        16,
+        7
+      ],
+      [
+        4,
+        45
+      ]
+    ]
+  },
+  "history": [
+    {
+      "model": "logistic_regression",
+      "validation": {
+        "accuracy": 0.9444444444444444,
+        "f1": 0.9591836734693877,
+        "confusion_matrix": [
+          [
+            21,
+            2
+          ],
+          [
+            2,
+            47
+          ]
+        ]
+      },
+      "decision": "Validation F1 is below the target. Try the remaining candidate."
+    },
+    {
+      "model": "decision_tree",
+      "validation": {
+        "accuracy": 0.9305555555555556,
+        "f1": 0.9504950495049505,
+        "confusion_matrix": [
+          [
+            19,
+            4
+          ],
+          [
+            1,
+            48
+          ]
+        ]
+      },
+      "decision": "Both candidates ran and validation F1 stayed below the target."
+    }
+  ],
+  "trace": [
+    {
+      "node": "data_agent",
+      "message": "Loaded 358 students from SQLite. Split into 214 train, 72 validation, and 72 test rows. Training pass rate was 67.8%. Model inputs are the four earlier grades."
+    },
+    {
+      "node": "scientist",
+      "message": "Start with a linear model using the four earlier grades."
+    },
+    {
+      "node": "engineer",
+      "message": "Fitted logistic_regression on the training split."
+    },
+    {
+      "node": "critic",
+      "message": "logistic_regression validation F1 was 0.959. Validation F1 is below the target. Try the remaining candidate."
+    },
+    {
+      "node": "scientist",
+      "message": "Previous validation F1 was 0.959. Try a shallow tree to capture grade cutoffs and interactions."
+    },
+    {
+      "node": "engineer",
+      "message": "Fitted decision_tree on the training split."
+    },
+    {
+      "node": "critic",
+      "message": "decision_tree validation F1 was 0.950. Both candidates ran and validation F1 stayed below the target."
+    },
+    {
+      "node": "report",
+      "message": "Selected logistic_regression by validation F1 and evaluated it once on the test split."
+    }
+  ]
+}

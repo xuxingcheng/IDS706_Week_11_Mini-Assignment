@@ -1,0 +1,48 @@
+name: student-airflow
+
+services:
+  airflow:
+    build: .
+    image: student-airflow:local
+    user: "${AIRFLOW_UID:-50000}:0"
+    command: standalone
+    ports:
+      - "127.0.0.1:8080:8080"
+    environment:
+      AIRFLOW__CORE__DAGS_FOLDER: /workspace/dags
+      AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__CORE__PARALLELISM: "4"
+      # Local classroom deployment only; port is bound to localhost.
+      AIRFLOW__CORE__SIMPLE_AUTH_MANAGER_ALL_ADMINS: "true"
+      PYTHONPATH: /workspace
+      DATA_DIR: /workspace/data
+      OUTPUT_DIR: /workspace/outputs
+      MPLCONFIGDIR: /tmp/matplotlib
+    volumes:
+      - airflow-home:/opt/airflow
+      - .:/workspace
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:8080/api/v2/monitor/health"]
+      interval: 15s
+      timeout: 10s
+      retries: 10
+      start_period: 60s
+
+  agents:
+    image: student-airflow:local
+    user: "${AIRFLOW_UID:-50000}:0"
+    build: .
+    command: ["bash", "-c", "exec streamlit run app.py --server.address=0.0.0.0 --server.port=8501 --browser.gatherUsageStats=false"]
+    ports:
+      - "127.0.0.1:8501:8501"
+    environment:
+      PYTHONPATH: /workspace
+      DATA_DIR: /workspace/data
+      OUTPUT_DIR: /workspace/outputs
+      MPLCONFIGDIR: /tmp/matplotlib
+    volumes:
+      - .:/workspace
+
+volumes:
+  airflow-home:

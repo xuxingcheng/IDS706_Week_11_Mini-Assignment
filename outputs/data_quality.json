@@ -1,0 +1,14 @@
+{
+  "source_url": "https://archive.ics.uci.edu/static/public/320/student%2Bperformance.zip",
+  "math_clean_rows": 395,
+  "portuguese_clean_rows": 649,
+  "ambiguous_key_groups": 11,
+  "math_ambiguous_rows": 12,
+  "portuguese_ambiguous_rows": 23,
+  "math_unmatched_rows": 25,
+  "portuguese_unmatched_rows": 268,
+  "matched_rows": 358,
+  "passed_math": 243,
+  "failed_math": 115,
+  "database": "students.db"
+}

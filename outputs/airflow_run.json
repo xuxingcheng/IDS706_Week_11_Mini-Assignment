@@ -1,0 +1,54 @@
+{
+  "run": {
+    "dag_id": "student_performance_pipeline",
+    "run_id": "verified_after_rebuild",
+    "state": "success",
+    "run_type": "manual",
+    "start_date": "2026-11-13 02:12:14.417650",
+    "end_date": "2026-11-13 02:12:19.452907"
+  },
+  "tasks": [
+    {
+      "task_id": "portuguese.ingest",
+      "state": "success",
+      "start_date": "2026-11-13 02:12:14.487000",
+      "end_date": "2026-11-13 02:12:16.038874",
+      "try_number": 1
+    },
+    {
+      "task_id": "math.ingest",
+      "state": "success",
+      "start_date": "2026-11-13 02:12:14.487544",
+      "end_date": "2026-11-13 02:12:16.032948",
+      "try_number": 1
+    },
+    {
+      "task_id": "math.clean",
+      "state": "success",
+      "start_date": "2026-11-13 02:12:16.349017",
+      "end_date": "2026-11-13 02:12:16.611532",
+      "try_number": 1
+    },
+    {
+      "task_id": "portuguese.clean",
+      "state": "success",
+      "start_date": "2026-11-13 02:12:16.349029",
+      "end_date": "2026-11-13 02:12:16.612982",
+      "try_number": 1
+    },
+    {
+      "task_id": "merge_and_load",
+      "state": "success",
+      "start_date": "2026-11-13 02:12:17.385070",
+      "end_date": "2026-11-13 02:12:17.640539",
+      "try_number": 1
+    },
+    {
+      "task_id": "analyze",
+      "state": "success",
+      "start_date": "2026-11-13 02:12:18.425336",
+      "end_date": "2026-11-13 02:12:19.261818",
+      "try_number": 1
+    }
+  ]
+}
